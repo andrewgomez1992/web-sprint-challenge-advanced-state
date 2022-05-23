@@ -1,6 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import * as actionCreators from '../state/action-creators'
+import { fetchQuiz } from '../state/action-creators'
 
-export default function Quiz(props) {
+export function Quiz(props) {
+  console.log(props)
+
+  useEffect(() => {
+    props.fetchQuiz()
+  }, [])
+
   return (
     <div id="wrapper">
       {
@@ -32,3 +41,5 @@ export default function Quiz(props) {
     </div>
   )
 }
+
+export default connect(st => st, { fetchQuiz })(Quiz)
