@@ -25,17 +25,25 @@ export function moveCounterClockwise() {
   return { type: MOVE_COUNTERCLOCKWISE }
 }
 
-export function selectAnswer() { }
-
-export function setMessage() { }
-
-export function setQuiz(quizData) {
-  return ({ type: SET_QUIZ_INTO_STATE, payload: quizData })
+export function selectAnswer(answer) {
+  return { type: SET_SELECTED_ANSWER, payload: answer }
 }
 
-export function inputChange() { }
+export function setMessage(message) {
+  return { type: SET_INFO_MESSAGE, payload: message }
+}
 
-export function resetForm() { }
+export function setQuiz(quizData) {
+  return { type: SET_QUIZ_INTO_STATE, payload: quizData }
+}
+
+export function inputChange({ inputId: e, value: t }) {
+  return { type: INPUT_CHANGE, payload: { inputId: e, value: t } }
+}
+
+export function resetForm() {
+  return { type: RESET_FORM }
+}
 
 // ❗ Async action creators
 export function fetchQuiz() {

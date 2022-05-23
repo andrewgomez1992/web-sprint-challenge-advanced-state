@@ -1,40 +1,24 @@
-import React, { useState } from 'react'
-import { moveClockwise, moveCounterClockwise } from '../state/action-creators'
-import { connect } from 'react-redux'
-import * as actionCreators from '../state/action-creators'
+import React from 'react'
+import { connect } from 'react-redux';
+import { moveClockwise, moveCounterClockwise } from '../state/action-creators';
 
-export function Wheel(props) {
-  // console.log(props)
-
-  const initialWheel = ["B", null, null, null, null, null]
-  const [wheels, setWheels] = useState(initialWheel)
-  const { wheel, moveClockwise, moveCounterClockwise } = props;
-
-  const handleClockwise = () => {
-    props.moveClockwise()
-  }
-
-  const handleCounterClockwise = () => {
-    props.moveCounterClockwise()
-  }
-
+function Wheel(props) {
   return (
     <div id="wrapper">
       <div id="wheel">
-        {
-          wheels.map((val, idx) => {
-            return (
-              <div key={idx} style={{ "--i": idx }} className={`cog ${wheels[idx] ? " cog active" : ""}`}>{val}</div>
-            )
-          })
-        }
+        <div className={`cog ${props.wheel === 0 ? "active" : ""}`} style={{ "--i": 0 }}>{`${props.wheel === 0 ? "B" : ""}`}</div>
+        <div className={`cog ${props.wheel === 1 ? "active" : ""}`} style={{ "--i": 1 }}>{`${props.wheel === 1 ? "B" : ""}`}</div>
+        <div className={`cog ${props.wheel === 2 ? "active" : ""}`} style={{ "--i": 2 }}>{`${props.wheel === 2 ? "B" : ""}`}</div>
+        <div className={`cog ${props.wheel === 3 ? "active" : ""}`} style={{ "--i": 3 }}>{`${props.wheel === 3 ? "B" : ""}`}</div>
+        <div className={`cog ${props.wheel === 4 ? "active" : ""}`} style={{ "--i": 4 }}>{`${props.wheel === 4 ? "B" : ""}`}</div>
+        <div className={`cog ${props.wheel === 5 ? "active" : ""}`} style={{ "--i": 5 }}>{`${props.wheel === 5 ? "B" : ""}`}</div>{/* --i is a custom CSS property, no need to touch that nor the style object */}
       </div>
       <div id="keypad">
-        <button id="counterClockwiseBtn" onClick={handleCounterClockwise}>Counter clockwise</button>
-        <button id="clockwiseBtn" onClick={handleClockwise}>Clockwise</button>
+        <button id="counterClockwiseBtn" onClick={props.moveCounterClockwise} >Counter clockwise</button>
+        <button id="clockwiseBtn" onClick={props.moveClockwise}>Clockwise</button>
       </div>
     </div>
   )
 }
 
-export default connect(st => st, actionCreators)(Wheel)
+export default connect(st => st, { moveClockwise, moveCounterClockwise })(Wheel);

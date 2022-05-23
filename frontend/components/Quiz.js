@@ -42,4 +42,4 @@ export function Quiz(props) {
   )
 }
 
-export default connect(st => st, { fetchQuiz })(Quiz)
+export default connect(st => st, actionCreators)(Quiz)
